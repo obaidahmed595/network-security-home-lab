@@ -2,84 +2,108 @@
 
 ## Overview
 
-This project demonstrates a simulated enterprise network security environment focused on firewall configuration, VLAN segmentation, VPN connectivity, access control, traffic monitoring, and basic security testing.
+A hands-on network security lab demonstrating enterprise-style network segmentation, firewall policy design, NAT, VPN architecture, and packet-level traffic analysis.
 
-The goal of this lab is to demonstrate practical network security concepts using technologies and workflows commonly used by Network Security Engineers.
+The project combines security architecture documentation with practical Wireshark traffic analysis to demonstrate core Network Security Engineer skills.
 
-## Objectives
+## Skills Demonstrated
 
-- Design a segmented network architecture
-- Configure firewall security policies
-- Implement VLAN-based network segmentation
-- Configure NAT and ACL rules
-- Demonstrate site-to-site and remote-access VPN concepts
-- Monitor network traffic
-- Analyze suspicious network activity
-- Document security configurations and findings
+- Network segmentation and VLAN design
+- Firewall security policy design
+- Least-privilege access control
+- Source NAT and Destination NAT
+- Site-to-Site IPSec VPN concepts
+- Remote-Access VPN concepts
+- TCP/IP and DNS analysis
+- Wireshark packet analysis
+- HTTPS/TLS traffic analysis
+- ICMP troubleshooting
+- Security logging and monitoring
 
-## Technologies
+## Network Architecture
 
-- Palo Alto Firewall
-- Fortinet / FortiGate
-- Cisco Routers & Switches
-- Wireshark
-- TCP/IP
-- DNS
-- VLANs
-- ACLs
-- NAT
-- IPSec VPN
-- SSL VPN
+The lab separates user, server, and management systems into dedicated security zones.
 
-## Lab Architecture
+                INTERNET
+                    |
+                FIREWALL
+                    |
+               CORE SWITCH
+                    |
+       ---------------------------
+       |            |            |
+    VLAN 10      VLAN 20      VLAN 30
+     USERS        SERVERS     MANAGEMENT
+       |            |            |
+192.168.10.0/24 192.168.20.0/24 192.168.30.0/24
 
-Planned architecture:
+### Security Zones
 
-Internet
-   |
-Firewall
-   |
-Core Router / Switch
-   |
----------------------------------
-|               |               |
-VLAN 10         VLAN 20         VLAN 30
-Users           Servers         Management
-192.168.10.0    192.168.20.0    192.168.30.0
-/24             /24             /24
+| Zone | Network | Purpose |
+|---|---|---|
+| USERS | 192.168.10.0/24 | User endpoints |
+| SERVERS | 192.168.20.0/24 | Internal services |
+| MANAGEMENT | 192.168.30.0/24 | Administrative systems |
+| UNTRUST | Internet | External networks |
 
 ## Security Controls
 
-The lab includes:
+The lab applies several core network-security principles:
 
-- Firewall policy configuration
+- Default-deny firewall policy
+- Least-privilege access
 - Network segmentation
-- ACL implementation
-- NAT configuration
-- VPN connectivity
-- IDS/IPS monitoring
-- Traffic analysis using Wireshark
-- Restricted communication between VLANs
+- Management-network isolation
+- Controlled Internet access
+- Restricted inbound services
+- NAT
+- VPN encryption
+- Security logging and monitoring
 
-## Project Structure
+## Hands-On Traffic Analysis
 
-network-security-home-lab/
+Wireshark was used to capture and analyze network traffic generated during the lab.
 
-- README.md
-- diagrams/
-- firewall/
-- vpn/
-- monitoring/
-- screenshots/
+### DNS Analysis
 
-## Future Improvements
+![DNS Analysis](screenshots/wireshark-dns.png)
 
-- Add SIEM integration
-- Add centralized logging
-- Add IDS/IPS detection scenarios
-- Integrate AWS or Azure network security
-- Automate configuration checks using Python
+DNS queries and responses were analyzed to identify domain-resolution behavior.
+
+### HTTPS / TLS Analysis
+
+![HTTPS Analysis](screenshots/wireshark-https.png)
+
+TCP port 443 and TLS 1.3 traffic were examined to understand encrypted communication and connection metadata.
+
+### ICMP Analysis
+
+![ICMP Analysis](screenshots/wireshark-icmp.png)
+
+ICMP echo requests and replies were captured to validate connectivity and demonstrate packet-level troubleshooting.
+
+## Project Documentation
+
+- [Network Architecture](diagrams/network-architecture.md)
+- [Firewall Security Policies](firewall/firewall-rules.md)
+- [NAT Configuration](firewall/nat-rules.md)
+- [VPN Configuration](vpn/vpn-configuration.md)
+- [Wireshark Traffic Analysis](monitoring/traffic-analysis.md)
+
+## Tools & Technologies
+
+**Networking:** TCP/IP, DNS, VLANs, ACLs, NAT  
+**Security:** Firewall Policies, Network Segmentation, VPN, Least Privilege  
+**VPN:** IPSec, Site-to-Site VPN, Remote-Access VPN  
+**Monitoring:** Wireshark  
+**Protocols:** DNS, TCP, TLS/HTTPS, ICMP
+
+## Key Takeaways
+
+This project demonstrates how network segmentation, firewall policies, NAT, VPN connectivity, and traffic monitoring can work together to protect an enterprise-style network.
+
+The hands-on packet analysis demonstrates the ability to inspect network communication, apply protocol filters, troubleshoot connectivity, and identify traffic that may require further security investigation.
 
 ## Disclaimer
 
-This project is created in a controlled lab environment for educational and portfolio purposes. No production systems or unauthorized networks are used.
+This project was created in an authorized lab environment for educational and portfolio purposes. IP addresses and configurations are examples used for documentation. No confidential company configurations, credentials, or production data are included.
