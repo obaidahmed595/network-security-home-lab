@@ -135,13 +135,63 @@ When suspicious network activity is detected:
 
 ## Screenshots
 
-The following evidence will be added after completing the lab:
+## Lab Evidence
 
-- DNS packet capture
-- TCP three-way handshake
-- HTTPS traffic
-- ICMP echo request/reply
-- Wireshark filter examples
+The following packet captures were generated during the authorized home-lab exercise using Wireshark.
+
+### 1. DNS Traffic Analysis
+
+The DNS capture demonstrates DNS queries and responses between the client and DNS resolver. The analysis includes A/AAAA record lookups, query responses, and domain-resolution activity.
+
+![Wireshark DNS Traffic](../screenshots/wireshark-dns.png)
+
+**Display filter:**
+
+`dns`
+
+**Observation:** DNS traffic can be analyzed to identify requested domains, DNS servers, response codes, and unusual resolution activity.
+
+---
+
+### 2. HTTPS / TLS Traffic Analysis
+
+The HTTPS capture demonstrates TCP port 443 communication and TLS 1.3 traffic, including Client Hello, Server Hello, and encrypted application data.
+
+![Wireshark HTTPS Traffic](../screenshots/wireshark-https.png)
+
+**Display filter:**
+
+`tcp.port == 443`
+
+**Observation:** HTTPS payloads are encrypted, but connection metadata such as source/destination addresses, ports, TLS negotiation, and communication patterns remain available for network analysis.
+
+---
+
+### 3. ICMP Traffic Analysis
+
+ICMP traffic was generated to validate network connectivity. The capture shows echo requests from the client and corresponding echo replies from the destination.
+
+![Wireshark ICMP Traffic](../screenshots/wireshark-icmp.png)
+
+**Display filter:**
+
+`icmp`
+
+**Observation:** ICMP analysis can assist with connectivity troubleshooting and can also help identify unusual network-discovery activity.
+
+---
+
+### 4. TCP Traffic Analysis
+
+TCP traffic was captured to examine connection establishment and normal TCP communication behavior.
+
+![Wireshark TCP Traffic](../screenshots/wireshark-tcp-handshake.png)
+
+**Display filter:**
+
+`tcp`
+
+**Observation:** TCP analysis can help identify SYN packets, SYN-ACK responses, ACK packets, connection failures, resets, and unexpected destination ports.
 
 ---
 
