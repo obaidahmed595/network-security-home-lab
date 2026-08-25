@@ -133,8 +133,6 @@ When suspicious network activity is detected:
 
 ---
 
-## Screenshots
-
 ## Lab Evidence
 
 The following packet captures were generated during the authorized home-lab exercise using Wireshark.
